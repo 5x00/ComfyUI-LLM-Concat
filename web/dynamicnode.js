@@ -14,6 +14,8 @@ const _ID = "LLMConcate";
 const _PREFIX = "string_field";
 const _TYPE = "STRING";
 
+let slot_index = 0
+
 app.registerExtension({
   name: "5x00.llmconcat",
   async beforeRegisterNodeDef(nodeType, nodeData, app) {
@@ -72,6 +74,7 @@ app.registerExtension({
             continue;
           }
           idx += 1;
+          slot_index = idx
           const name = slot.name.split("_")[0];
 
           let count = (slot_tracker[name] || 0) + 1;
@@ -83,6 +86,7 @@ app.registerExtension({
         // Ensure the last slot is a dynamic string input
         let last = this.inputs[this.inputs.length - 1];
         if (last === undefined || last.name != _PREFIX || last.type != _TYPE) {
+          newPrefix = "slot_" + str(slot_index)
           this.addInput(_PREFIX, _TYPE);
         }
 
