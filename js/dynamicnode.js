@@ -1,4 +1,5 @@
 import { app } from "../../../scripts/app.js";
+import { ComfyWidgets } from "../../scripts/widgets.js";
 
 const TypeSlot = {
   Input: 1,
@@ -10,6 +11,8 @@ const TypeSlotEvent = {
   Disconnect: false,
 };
 
+let stringInputs = [];
+
 const _ID = "LLMConcate";
 const _PREFIX = "String";
 const _TYPE = "STRING";
@@ -17,7 +20,6 @@ const _TYPE = "STRING";
 app.registerExtension({
   name: "5x00.llmconcat",
   async beforeRegisterNodeDef(nodeType, nodeData, app) {
-    // skip the node if it is not the one we want
     if (nodeData.name !== _ID) {
       return;
     }
@@ -119,11 +121,10 @@ app.registerExtension({
           }
           idx += 1;
           const name = slot.name.split("_")[0];
-
           let count = (slot_tracker[name] || 0) + 1;
           slot_tracker[name] = count;
-
           slot.name = `${name}_${count}`;
+          console.log(slot_tracker[name]);
         }
 
         // Ensure the last slot is a dynamic string input
@@ -136,6 +137,12 @@ app.registerExtension({
         this?.graph?.setDirtyCanvas(true);
         return me;
       }
+    };
+
+    const onExecuted = nodeType.prototype.onExecuted;
+    nodeType.prototype.onExecuted = async function () {
+      // Initialize an object to store dynamic string inputs
+      let dynamicStrings = {};
     };
     return nodeType;
   },

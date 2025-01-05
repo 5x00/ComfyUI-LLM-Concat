@@ -9,8 +9,12 @@ class LLMConcat:
 
     RETURN_TYPES = ("STRING",)
     RETURN_NAMES = ("String",)
-    FUNCTION = "concat"
+    FUNCTION = "run"
     CATEGORY = "5x00"
+
+    @classmethod
+    def IS_CHANGED(cls, **kwargs):
+        return float("NaN")
 
     @classmethod
     def INPUT_TYPES(s) -> Dict[str, dict]:
