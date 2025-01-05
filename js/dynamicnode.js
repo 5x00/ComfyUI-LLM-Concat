@@ -25,6 +25,52 @@ app.registerExtension({
     const onNodeCreated = nodeType.prototype.onNodeCreated;
     nodeType.prototype.onNodeCreated = async function () {
       const me = onNodeCreated?.apply(this);
+      //Add main widgets
+      // Add a single-line text input widget
+      this.addWidget(
+        "text",
+        "API Key",
+        "",
+        (value) => {
+          // You can store the value in a property if needed
+          // this.API_Key = value;
+        },
+        {
+          label: "_api", // Label for the widget
+          multiline: false, // Disable multiline
+        }
+      );
+
+      // Add a multi-line text input widget
+      this.addWidget(
+        "text",
+        "Prompt",
+        "Generate a image generation prompt that combines {string_1} and {string_2}",
+        (value) => {
+          // You can store the value in a property if needed
+          // this.multilineValue = value;
+        },
+        {
+          label: "prompt", // Label for the widget
+          multiline: true, // Enable multiline
+        }
+      );
+
+      // Add a dropdown menu widget
+      this.addWidget(
+        "combo",
+        "LLM",
+        "GPT-4o",
+        (value) => {
+          // You can store the value in a property if needed
+          //this.dropdownValue = value;
+        },
+        {
+          label: "llmSel", // Label for the widget
+          values: ["GPT-4o", "Claude"], // Available options
+        }
+      );
+
       // start with a new dynamic input specifically for strings
       this.addInput(_PREFIX, _TYPE);
       return me;
@@ -64,7 +110,7 @@ app.registerExtension({
         }
 
         // Track each slot name so we can index the uniques
-        let idx = 0;
+        let idx = Object.keys(this.widgets).length;
         let slot_tracker = {};
         for (const slot of this.inputs) {
           if (slot.link === null) {
@@ -85,15 +131,6 @@ app.registerExtension({
         if (last === undefined || last.name != _PREFIX || last.type != _TYPE) {
           this.addInput(_PREFIX, _TYPE);
         }
-
-        //Add the rest of the widgets
-        this.addWidget(
-          "text", // Type of the widget
-          "Multiline Text", // Name of the widget
-          "", // Default value (empty string)
-          null, // No callback for now
-          { multiline: true } // Options: Enable multiline input
-        );
 
         // force the node to resize itself for the new/deleted connections
         this?.graph?.setDirtyCanvas(true);
