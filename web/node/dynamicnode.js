@@ -64,7 +64,7 @@ app.registerExtension({
         }
 
         // Track each slot name so we can index the uniques
-        let idx = 0;
+        let idx = this.inputs.length;
         let slot_tracker = {};
         for (const slot of this.inputs) {
           if (slot.link === null) {

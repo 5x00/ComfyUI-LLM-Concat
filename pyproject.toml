@@ -2,5 +2,14 @@
 name = "llm_concat"
 description = "Concat string node powered by ChatGPT/Claude"
 version = "1.0.0"
-license = { file = "LICENSE" }
+license = { text = "MIT License" }
 dependencies = []
+
+[project.urls]
+Repository = "https://github.com/5x00/ComfyUI-LLM-Concat.git"
+#  Used by Comfy Registry https://comfyregistry.org
+
+[tool.comfy]
+PublisherId = "5x00"
+DisplayName = "subink"
+Icon = ""
