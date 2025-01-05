@@ -2,7 +2,7 @@ from typing import Any, Dict, Tuple
 
 NODE_CLASS_MAPPINGS = {}
 NODE_DISPLAY_NAME_MAPPINGS = {}
-WEB_DIRECTORY = "./web"
+WEB_DIRECTORY = "./js"
 __all__ = ["NODE_CLASS_MAPPINGS", "NODE_DISPLAY_NAME_MAPPINGS", "WEB_DIRECTORY"]
 
 class LLMConcat:
@@ -15,11 +15,7 @@ class LLMConcat:
     @classmethod
     def INPUT_TYPES(s) -> Dict[str, dict]:
         return {
-            "required": {
-                "Prompt" : ("STRING", {"multiline": True, "default": "{string_1} wearing {string_2} standing in front of a {string_3}"}),
-                "API_Key" : ("STRING", {}),
-                "Service" : (["OpenAI", "Claude"],),
-            },
+            "required": {},
             "optional": {}
         }
 

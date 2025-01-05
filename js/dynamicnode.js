@@ -11,7 +11,7 @@ const TypeSlotEvent = {
 };
 
 const _ID = "LLMConcate";
-const _PREFIX = "string_field";
+const _PREFIX = "String";
 const _TYPE = "STRING";
 
 app.registerExtension({
@@ -64,7 +64,7 @@ app.registerExtension({
         }
 
         // Track each slot name so we can index the uniques
-        let idx = this.inputs.length;
+        let idx = 0;
         let slot_tracker = {};
         for (const slot of this.inputs) {
           if (slot.link === null) {
@@ -85,6 +85,15 @@ app.registerExtension({
         if (last === undefined || last.name != _PREFIX || last.type != _TYPE) {
           this.addInput(_PREFIX, _TYPE);
         }
+
+        //Add the rest of the widgets
+        this.addWidget(
+          "text", // Type of the widget
+          "Multiline Text", // Name of the widget
+          "", // Default value (empty string)
+          null, // No callback for now
+          { multiline: true } // Options: Enable multiline input
+        );
 
         // force the node to resize itself for the new/deleted connections
         this?.graph?.setDirtyCanvas(true);
