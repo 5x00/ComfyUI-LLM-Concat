@@ -87,9 +87,11 @@ app.registerExtension({
         let last = this.inputs[this.inputs.length - 1];
         if (last === undefined || last.name != _PREFIX || last.type != _TYPE) {
           newPrefix = "slot_" + str(slot_index)
-          this.addInput(_PREFIX, _TYPE);
+          this.addInput(newPrefix, _TYPE);
         }
 
+        // force the node to resize itself for the new/deleted connections
+        this?.graph?.setDirtyCanvas(true);
         return me;
       }
     };
