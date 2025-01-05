@@ -1,0 +1,6 @@
+[project]
+name = "llm_concat"
+description = "Concat string node powered by ChatGPT/Claude"
+version = "1.0.0"
+license = { file = "LICENSE" }
+dependencies = []
