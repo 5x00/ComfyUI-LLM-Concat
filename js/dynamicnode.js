@@ -1,5 +1,4 @@
 import { app } from "../../../scripts/app.js";
-import { ComfyWidgets } from "../../scripts/widgets.js";
 
 const TypeSlot = {
   Input: 1,
@@ -11,10 +10,8 @@ const TypeSlotEvent = {
   Disconnect: false,
 };
 
-let stringInputs = [];
-
 const _ID = "LLMConcate";
-const _PREFIX = "String";
+const _PREFIX = "string";
 const _TYPE = "STRING";
 
 app.registerExtension({
@@ -27,52 +24,6 @@ app.registerExtension({
     const onNodeCreated = nodeType.prototype.onNodeCreated;
     nodeType.prototype.onNodeCreated = async function () {
       const me = onNodeCreated?.apply(this);
-      //Add main widgets
-      // Add a single-line text input widget
-      this.addWidget(
-        "text",
-        "API Key",
-        "",
-        (value) => {
-          // You can store the value in a property if needed
-          // this.API_Key = value;
-        },
-        {
-          label: "_api", // Label for the widget
-          multiline: false, // Disable multiline
-        }
-      );
-
-      // Add a multi-line text input widget
-      this.addWidget(
-        "text",
-        "Prompt",
-        "Generate a image generation prompt that combines {string_1} and {string_2}",
-        (value) => {
-          // You can store the value in a property if needed
-          // this.multilineValue = value;
-        },
-        {
-          label: "prompt", // Label for the widget
-          multiline: true, // Enable multiline
-        }
-      );
-
-      // Add a dropdown menu widget
-      this.addWidget(
-        "combo",
-        "LLM",
-        "GPT-4o",
-        (value) => {
-          // You can store the value in a property if needed
-          //this.dropdownValue = value;
-        },
-        {
-          label: "llmSel", // Label for the widget
-          values: ["GPT-4o", "Claude"], // Available options
-        }
-      );
-
       // start with a new dynamic input specifically for strings
       this.addInput(_PREFIX, _TYPE);
       return me;
@@ -112,7 +63,7 @@ app.registerExtension({
         }
 
         // Track each slot name so we can index the uniques
-        let idx = Object.keys(this.widgets).length;
+        let idx = 0;
         let slot_tracker = {};
         for (const slot of this.inputs) {
           if (slot.link === null) {
@@ -124,7 +75,6 @@ app.registerExtension({
           let count = (slot_tracker[name] || 0) + 1;
           slot_tracker[name] = count;
           slot.name = `${name}_${count}`;
-          console.log(slot_tracker[name]);
         }
 
         // Ensure the last slot is a dynamic string input
@@ -134,16 +84,12 @@ app.registerExtension({
         }
 
         // force the node to resize itself for the new/deleted connections
-        this?.graph?.setDirtyCanvas(true);
+					app.graph.setDirtyCanvas(true, false);
+
         return me;
       }
-    };
-
-    const onExecuted = nodeType.prototype.onExecuted;
-    nodeType.prototype.onExecuted = async function () {
-      // Initialize an object to store dynamic string inputs
-      let dynamicStrings = {};
     };
     return nodeType;
   },
 });
+
