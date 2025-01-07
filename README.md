@@ -1,5 +1,5 @@
 # ComfyUI-Prompt-Plus
-Prompt Plus is a collection of LLM and VLM nodes that make prompting easier for image and video generation.
+Prompt Plus is a collection of LLM and VLM nodes that make prompting easier for image and video generation.\n
 ⭐ Trigger Words to Prompt, Guided VLM Prompter, No BS String, No BS Textbox
 
 ## Nodes
