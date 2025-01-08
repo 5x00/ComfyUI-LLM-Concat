@@ -1,12 +1,12 @@
 [project]
-name = "llm_concat"
-description = "Concat string node powered by ChatGPT/Claude"
+name = "prompt_plus"
+description = "LLM and VLM nodes to make prompting easier."
 version = "1.0.0"
 license = { text = "MIT License" }
 dependencies = []
 
 [project.urls]
-Repository = "https://github.com/5x00/ComfyUI-LLM-Concat.git"
+Repository = "https://github.com/5x00/ComfyUI-Prompt-Plus.git"
 #  Used by Comfy Registry https://comfyregistry.org
 
 [tool.comfy]
