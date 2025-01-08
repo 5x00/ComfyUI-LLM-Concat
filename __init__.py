@@ -61,12 +61,13 @@ class TriggerToPromptAPI:
         api_key = api_model['api_key']
         service = api_model['api']
         result = replace_placeholders(kwargs['prompt'], kwargs)
+        print(result)
         caption = ""
         if api_key is not None:
             if service == "OpenAI":
-                caption = gen_openai(api_key, result)
+                caption = gen_openai(api_key, Prompt=result)
             if service == "Claude":
-                caption = gen_claude(api_key, result)
+                caption = gen_claude(api_key, Prompt=result)
         else:
              caption = result
 
