@@ -23,3 +23,10 @@ Includes a few nodes that support Trigger2Prompt and Guided VLM.
 
 - git clone this repository into ComfyUI/custom_nodes
 - pip install -r requirements.txt
+
+## Example Workflow
+
+![image](https://github.com/user-attachments/assets/46ad9559-76f8-4f7d-b643-945a248f76eb)
+
+Download the "flux_example.json" to test the full workflow.
+
