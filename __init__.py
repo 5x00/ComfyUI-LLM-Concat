@@ -1,5 +1,5 @@
 from typing import Any, Dict, Tuple
-from .utils import gen_openai, gen_claude
+from .utils import llm_openai, vlm_openai, llm_claude, vlm_claude
 import torch
 import os
 from transformers import AutoModelForCausalLM, AutoTokenizer, pipeline, AutoProcessor
@@ -61,13 +61,12 @@ class TriggerToPromptAPI:
         api_key = api_model['api_key']
         service = api_model['api']
         result = replace_placeholders(kwargs['prompt'], kwargs)
-        print(result)
         caption = ""
         if api_key is not None:
             if service == "OpenAI":
-                caption = gen_openai(api_key, Prompt=result)
+                caption = llm_openai(api_key, result)
             if service == "Claude":
-                caption = gen_claude(api_key, Prompt=result)
+                caption = llm_claude(api_key, result)
         else:
              caption = result
 
@@ -367,9 +366,9 @@ class RunAPIVLM:
         print("Generating caption for the image...")
         caption = ""
         if Service == "OpenAI":
-            caption = gen_openai(API_Key, Image, Prompt)
+            caption = vlm_openai(API_Key, Image, Prompt)
         if Service == "Claude":
-            caption = gen_claude(API_Key, Image, Prompt)
+            caption = vlm_claude(API_Key, Image, Prompt)
         print(f"Caption generated: {caption}")
         return (caption,)
 
