@@ -26,8 +26,7 @@ Includes a few nodes that support Trigger2Prompt and Guided VLM.
 
 ## Example Workflow
 
-![image](https://github.com/user-attachments/assets/f70c96d5-bed3-488b-bdf7-a227c9789fe7)
-
+![image](https://github.com/user-attachments/assets/b7d5854b-6eb7-4738-a0c1-71dbd5f274db)
 
 Download the "flux_example.json" to test the full workflow.
 
