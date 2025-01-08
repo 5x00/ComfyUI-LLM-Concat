@@ -1,8 +1,8 @@
 # ComfyUI-Prompt-Plus
 Prompt Plus is a collection of LLM and VLM nodes that make prompting easier for image and video generation.
 
-⭐ Trigger Words to Prompt
-⭐ Guided VLM Prompter
+⭐ Trigger Words to Prompt / Trigger2Prompt
+⭐ Guided VLM Prompter / VLM2Prompt
 
 ## Nodes
 ### Trigger2Prompt
@@ -11,9 +11,9 @@ There are three variations to this node > [API] uses ChatGPT/Claude for processi
 
 ![image](https://github.com/user-attachments/assets/f75c6b97-8535-499c-9da7-f7d71e85b33b)
 
-### Guided VLM Prompter
+### VLM2Prompt
 Let's you use a VLM along with a guidance prompt to generate captions. This can be useful if you want to generate prompts from images with some level of tweaking.
-There are two variations to this node > [API] uses ChatGPT/Claude for processing, [Custom] uses <> for local processing
+There are two variations to this node > [API] uses ChatGPT/Claude for processing, [Custom] uses Florence for local processing
 
 ### Utililty
 Includes a few nodes that support Trigger2Prompt and Guided VLM.
