@@ -27,7 +27,7 @@ def convert_image(Image):
     buffer.close()
     return base64_image
 
-def gen_openai(API_Key, Prompt):
+def llm_openai(API_Key, Prompt):
     # Initialize OpenAI client
     client = OpenAI(api_key=API_Key)
     # ChatGPT completions
@@ -46,7 +46,7 @@ def gen_openai(API_Key, Prompt):
     )
     return response.choices[0].message.content
 
-def gen_openai(API_Key, Image, Prompt):
+def vlm_openai(API_Key, Image, Prompt):
     # Initialize OpenAI client
     client = OpenAI(api_key=API_Key)
     # ChatGPT completions
@@ -64,7 +64,7 @@ def gen_openai(API_Key, Image, Prompt):
     )
     return response.choices[0].message.content
 
-def gen_claude(API_Key, Prompt):
+def llm_claude(API_Key, Prompt):
     #Initialize Claude client
     client = anthropic.Anthropic(api_key=API_Key)
 
@@ -77,7 +77,7 @@ def gen_claude(API_Key, Prompt):
 
     return message.content
 
-def gen_claude(API_Key, Image, Prompt):
+def vlm_claude(API_Key, Image, Prompt):
     #Initialize Claude client
     client = anthropic.Anthropic(api_key=API_Key)
 
