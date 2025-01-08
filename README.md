@@ -2,6 +2,7 @@
 Prompt Plus is a collection of LLM and VLM nodes that make prompting easier for image and video generation.
 
 ⭐ Trigger Words to Prompt / Trigger2Prompt
+
 ⭐ Guided VLM Prompter / VLM2Prompt
 
 ## Nodes
