@@ -1,1 +1,7 @@
-
+torch
+transformers
+numpy
+Pillow
+openai
+anthropic
+comfy
