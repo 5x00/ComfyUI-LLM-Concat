@@ -21,4 +21,5 @@ Includes a few nodes that support Trigger2Prompt and Guided VLM.
 
 ## Installation
 
-git clone this repository into ComfyUI/custom_nodes
+- git clone this repository into ComfyUI/custom_nodes
+- pip install -r requirements.txt
