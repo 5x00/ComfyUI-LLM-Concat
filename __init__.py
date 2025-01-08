@@ -27,6 +27,10 @@ class Prompt:
             }
         }
 
+    @classmethod
+    def IS_CHANGED(cls, **kwargs):
+        return float("NaN")
+
     RETURN_TYPES = ("STRING",)
     RETURN_NAMES = ("prompt",)
     FUNCTION = "run"
@@ -41,6 +45,10 @@ class TriggerToPromptAPI:
         return {
             "required": {}
         }
+
+    @classmethod
+    def IS_CHANGED(cls, **kwargs):
+        return float("NaN")
 
     RETURN_TYPES = ("STRING",)
     RETURN_NAMES = ("caption",)
@@ -76,6 +84,10 @@ class LoadAPI:
             }
         }
 
+    @classmethod
+    def IS_CHANGED(cls, **kwargs):
+        return float("NaN")
+
     RETURN_TYPES = ("APIMODEL",)
     RETURN_NAMES = ("model",)
     FUNCTION = "load_api"
@@ -110,6 +122,10 @@ class LoadCustomModel:
                 ),
             }
         }
+
+    @classmethod
+    def IS_CHANGED(cls, **kwargs):
+        return float("NaN")
 
     RETURN_TYPES = ("CUSTOMMODEL",)
     RETURN_NAMES = ("model",)
@@ -150,6 +166,10 @@ class TriggerToPromptCustom:
                 "do_sample": ("BOOLEAN", {"default": False}),                
             }
         }
+
+    @classmethod
+    def IS_CHANGED(cls, **kwargs):
+        return float("NaN")
 
     RETURN_TYPES = ("STRING",)
     RETURN_NAMES = ("output_text",)
@@ -199,6 +219,10 @@ class TriggerToPromptSimple:
             }
         }
 
+    @classmethod
+    def IS_CHANGED(cls, **kwargs):
+        return float("NaN")
+
     RETURN_TYPES = ("STRING",)
     RETURN_NAMES = ("output_text",)
     FUNCTION = "run"
@@ -236,6 +260,10 @@ class LoadFlorenceModel:
                 ),
             }
         }
+
+    @classmethod
+    def IS_CHANGED(cls, **kwargs):
+        return float("NaN")
 
     RETURN_TYPES = ("VLMODEL",)
     RETURN_NAMES = ("model",)
@@ -280,6 +308,10 @@ class RunCustomVLM:
             }
         }
 
+    @classmethod
+    def IS_CHANGED(cls, **kwargs):
+        return float("NaN")
+
     RETURN_TYPES = ("STRING",)
     RETURN_NAMES = ("caption",)
     FUNCTION = "run_model"
@@ -320,6 +352,10 @@ class RunAPIVLM:
                 "Service" : (["OpenAI", "Claude"],),
             }
         }
+
+    @classmethod
+    def IS_CHANGED(cls, **kwargs):
+        return float("NaN")
 
     RETURN_TYPES = ("STRING",)
     RETURN_NAMES = ("caption",)
