@@ -4,4 +4,3 @@ numpy
 Pillow
 openai
 anthropic
-comfy
