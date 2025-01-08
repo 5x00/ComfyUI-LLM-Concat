@@ -10,21 +10,33 @@ const TypeSlotEvent = {
   Disconnect: false,
 };
 
-const _ID = "LLMConcate";
+const _ID = [
+  "TriggerToPromptAPI",
+  "TriggerToPromptCustom",
+  "TriggerToPromptSimple",
+];
 const _PREFIX = "string";
 const _TYPE = "STRING";
 
 app.registerExtension({
-  name: "5x00.llmconcat",
+  name: "5x00.prompt_plus",
   async beforeRegisterNodeDef(nodeType, nodeData, app) {
-    if (nodeData.name !== _ID) {
+    if (!_ID.includes(nodeData.name)) {
       return;
     }
 
     const onNodeCreated = nodeType.prototype.onNodeCreated;
     nodeType.prototype.onNodeCreated = async function () {
       const me = onNodeCreated?.apply(this);
-      // start with a new dynamic input specifically for strings
+
+      if (nodeData.name === "TriggerToPromptCustom") {
+        this.addInput("model", "CUSTOMMODEL");
+      }
+      if (nodeData.name === "TriggerToPromptAPI") {
+        this.addInput("model", "APIMODEL");
+      }
+      this.addInput("prompt", "STRING");
+
       this.addInput(_PREFIX, _TYPE);
       return me;
     };
@@ -49,21 +61,25 @@ app.registerExtension({
           if (fromNode) {
             // Make sure the parent slot type is STRING
             const parent_link = fromNode.outputs[link_info.origin_slot];
-            if (parent_link?.type === "STRING") {
+            if (parent_link?.type === "STRING" && node_slot.name != "prompt") {
               // Allow only STRING type
               node_slot.type = parent_link.type;
               node_slot.name = `${_PREFIX}_`;
             } else {
               // Disconnect the link if the type is not STRING
-              this.graph.disconnectLink(link_info.id);
+              if (node_slot.name != "model" && node_slot.name != "prompt") {
+                this.graph.removeLink(link_info.id);
+              }
             }
           }
         } else if (event === TypeSlotEvent.Disconnect) {
-          this.removeInput(slot_idx);
+          if (node_slot.name != "model" && node_slot.name != "prompt") {
+            this.removeInput(slot_idx);
+          }
         }
 
         // Track each slot name so we can index the uniques
-        let idx = 0;
+        let idx = this.inputs.length;
         let slot_tracker = {};
         for (const slot of this.inputs) {
           if (slot.link === null) {
@@ -74,7 +90,9 @@ app.registerExtension({
           const name = slot.name.split("_")[0];
           let count = (slot_tracker[name] || 0) + 1;
           slot_tracker[name] = count;
-          slot.name = `${name}_${count}`;
+          if (slot.name != "model" && slot.name != "prompt") {
+            slot.name = `${name}_${count}`;
+          }
         }
 
         // Ensure the last slot is a dynamic string input
@@ -84,7 +102,7 @@ app.registerExtension({
         }
 
         // force the node to resize itself for the new/deleted connections
-					app.graph.setDirtyCanvas(true, false);
+        app.graph.setDirtyCanvas(true, false);
 
         return me;
       }
@@ -92,4 +110,3 @@ app.registerExtension({
     return nodeType;
   },
 });
-
